@@ -11,5 +11,8 @@
   "volta": {
     "node": "20.10.0",
     "npm": "10.2.3"
+  },
+  "devDependencies": {
+    "@google/clasp": "^2.4.2"
   }
 }
