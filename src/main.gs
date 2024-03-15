@@ -7,7 +7,7 @@ function doPost(e) {
 
     switch (event.type) {
       case 'message':
-        replyMessage(event.message.text, replyToken);
+        replyMessage(event.message.text, replyToken, event.message.quoteToken);
         break;
       case 'join':
         replyJoinMessage(replyToken);

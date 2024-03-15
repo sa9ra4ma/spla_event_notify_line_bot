@@ -3,6 +3,7 @@ const CHANNEL_ACCESS_TOKEN = PropertiesService.getScriptProperties().getProperty
 function sendReplyTextMessage({
   texts = [''],
   replyToken = '',
+  quoteToken = '',
 }) {
   const replyHeaders = {
     'Content-Type': 'application/json',
@@ -12,6 +13,7 @@ function sendReplyTextMessage({
     return {
       type: 'text',
       text,
+      quoteToken,
     };
   });
   const replyBody = {
@@ -31,6 +33,7 @@ function sendReplyTextMessage({
 function sendReplyQuickTextMessage({
   text = '',
   replyToken = '',
+  quoteToken = '',
 }) {
   const quickReplyList = [
     {
@@ -54,6 +57,7 @@ function sendReplyQuickTextMessage({
     quickReply: {
       items: quickReplyItems,
     },
+    quoteToken,
   }];
 
   const replyHeaders = {

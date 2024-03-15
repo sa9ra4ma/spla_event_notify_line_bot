@@ -1,5 +1,7 @@
-function replyMessage(text, replyToken) {
-  const texts = [text];
-  sendReplyTextMessage({texts, replyToken});
+function replyMessage(requestText, replyToken, quoteToken) {
+  if (requestText === '@ブキ') {
+    const text = 'もみじシューター！';
+    sendReplyQuickTextMessage({text, replyToken, quoteToken});
+  }
   return;
 }
