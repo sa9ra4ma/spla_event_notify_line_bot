@@ -5,25 +5,27 @@ function doPost(e) {
   const event = JSON.parse(requestLine).events[0];
   writeToSpreadsheet(event);
   const replyToken = event.replyToken;
- 
-  const LineMessageObject = [{
-    'type': 'text',
-    'text': event.message.text
-  }];
-  const replyHeaders = {
-    'Content-Type': 'application/json',
-    'Authorization': 'Bearer ' + CHANNEL_ACCESS_TOKEN
-  };
-  const replyBody = {
-    'replyToken': replyToken,
-    'messages': LineMessageObject
-  };
-  const replyOptions = {
-    'method': 'POST',
-    'headers': replyHeaders,
-    'payload': JSON.stringify(replyBody)
-  };
-  UrlFetchApp.fetch('https://api.line.me/v2/bot/message/reply', replyOptions);
+
+  if (event.type == 'message') {
+    const LineMessageObject = [{
+      'type': 'text',
+      'text': event.message.text
+    }];
+    const replyHeaders = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + CHANNEL_ACCESS_TOKEN
+    };
+    const replyBody = {
+      'replyToken': replyToken,
+      'messages': LineMessageObject
+    };
+    const replyOptions = {
+      'method': 'POST',
+      'headers': replyHeaders,
+      'payload': JSON.stringify(replyBody)
+    };
+    UrlFetchApp.fetch('https://api.line.me/v2/bot/message/reply', replyOptions);
+  }
 }
 
 function writeToSpreadsheet(event) {
