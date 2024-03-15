@@ -1,10 +1,10 @@
 function doPost(e) {
   const CHANNEL_ACCESS_TOKEN = PropertiesService.getScriptProperties().getProperty('CHANNEL_ACCESS_TOKEN');
 
-  const responseLine = e.postData.getDataAsString();
-  const event = JSON.parse(responseLine).events[0];
-  const replyToken = event.replyToken;
+  const requestLine = e.postData.getDataAsString();
+  const event = JSON.parse(requestLine).events[0];
   writeToSpreadsheet(event);
+  const replyToken = event.replyToken;
  
   const LineMessageObject = [{
     'type': 'text',
