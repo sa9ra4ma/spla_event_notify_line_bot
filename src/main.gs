@@ -66,13 +66,3 @@ function doPost(e) {
     UrlFetchApp.fetch(url, replyOptions);
   }
 }
-
-function writeToSpreadsheet(event) {
-  var id = "1QRqzxLVWZ-Un0l2RvEe9PaiCrEheam9wMgRZpnzUB7I"
-  var ss = SpreadsheetApp.openById(id);
-  var sheet = ss.getActiveSheet();
-  var lastRow = sheet.getLastRow();
-  sheet.getRange(lastRow + 1, 1).setValue(event.source?.userId);
-  sheet.getRange(lastRow + 1, 2).setValue(event.message?.text); 
-  sheet.getRange(lastRow + 1, 3).setValue(JSON.stringify(event)); 
-}
