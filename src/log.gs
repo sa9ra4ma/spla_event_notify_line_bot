@@ -4,6 +4,7 @@ function writeToSpreadsheet(event) {
   const sheet = ss.getActiveSheet();
   const lastRow = sheet.getLastRow();
   const logs = [
+    new Date(),
     event.source?.userId,
     event.message?.text,
     JSON.stringify(event),
