@@ -77,3 +77,37 @@ function sendReplyQuickTextMessage({
   UrlFetchApp.fetch(url, replyOptions);
   return;
 }
+
+function pushTextMessage({
+  texts = [''],
+  destinationIdList = [''],
+}) {
+  const messages = texts.map(text => {
+    return {
+      type: 'text',
+      text,
+    };
+  });
+  const postData = {
+    to: '',
+    messages,
+  };
+
+  const url = 'https://api.line.me/v2/bot/message/push';
+  const headers = {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${CHANNEL_ACCESS_TOKEN}`,
+  };
+
+  destinationIdList.forEach(id => {
+    postData.to = id;
+    const options = {
+      method: 'POST',
+      headers,
+      payload: JSON.stringify(postData),
+    };
+    UrlFetchApp.fetch(url, options);
+  });
+
+  return;
+}
