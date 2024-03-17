@@ -9,8 +9,20 @@ function doPost(e) {
       case 'message':
         replyMessage(event.message.text, replyToken, event.message.quoteToken);
         break;
-      case 'join':
+      case 'follow':
+        // MEMO: 初回フォローとブロック解除は同じfollowだが、リクエストの中身で判別できる。けど一旦しない。
+        addSource({sourceType: event.source?.type, sourceId: event.source?.userId, requestType: 'follow'});
         replyJoinMessage(replyToken);
+        break;
+      case 'unfollow':
+        addSource({sourceType: event.source?.type, sourceId: event.source?.userId, requestType: 'unfollow'});
+        break;
+      case 'join':
+        addSource({sourceType: event.source?.type, sourceId: event.source?.groupId, requestType: 'join'});
+        replyJoinMessage(replyToken);
+        break;
+      case 'leave':
+        addSource({sourceType: event.source?.type, sourceId: event.source?.groupId, requestType: 'leave'});
         break;
       default:
         break;
