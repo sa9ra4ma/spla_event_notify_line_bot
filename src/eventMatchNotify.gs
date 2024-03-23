@@ -3,17 +3,19 @@ function eventMatchNotify() {
   const response = UrlFetchApp.fetch(url);
   if (response.getResponseCode() !== 200) return;
   const resJson = JSON.parse(response.getContentText());
+  const resTarget = resJson.results[0];
   const text = [
-    '次のイベントマッチは…',
+    '今日はイベントマッチだ！',
+    '今回のイベントマッチは…',
     '',
-    `【${resJson.results[0].event.name}】`,
-    resJson.results[0].event.desc,
+    `【${resTarget.event.name}】`,
+    resTarget.event.desc,
     '',
-    `ルールは【${resJson.results[0].rule.name}】`,
+    `ルールは【${resTarget.rule.name}】`,
     '',
-    `ステージは【${resJson.results[0].stages[0].name}】と【${resJson.results[0].stages[1].name}】だ`,
+    `ステージは【${resTarget.stages[0].name}】と【${resTarget.stages[1].name}】だ`,
     '',
-    `【${formatDateToMdhmm(resJson.results[0].start_time)}】からあるからぜひ参加しような！`,
+    `【${formatDateToMdhmm(resTarget.start_time)}】からあるからぜひ参加しような！`,
   ].join('\n');
 
   const activeSources = getActiveSources();
