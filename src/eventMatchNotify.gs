@@ -15,7 +15,10 @@ function eventMatchNotify() {
     '',
     `【${formatDateToMdhmm(resJson.results[0].start_time)}】からあるからぜひ参加しような！`,
   ].join('\n');
-  pushTextMessage({texts: [text], destinationIdList: ['Ue2a914e2a504dfd512d796cc86a33552', 'C7d3d730d47a659e53aba408c6f56bf32']});
+
+  const activeSources = getActiveSources();
+  const activeSourceIds = activeSources.map(source => source.source_id);
+  pushTextMessage({texts: [text], destinationIdList: activeSourceIds});
 
   return;
 }
